@@ -2,6 +2,7 @@ import Module from "../models/module.js";
 import User from "../models/user.js";
 import Reverso from 'reverso-api';
 import { commonVerbs, essereVerbs } from "../constants/index.js";
+import preprocessData from "../utils/processData.js";
 
 const reverso = new Reverso();
 
@@ -187,14 +188,16 @@ export const createModule = async (req, res) => {
     // Add Module
     const modText = req.body.text;
     const modTitle = req.body.title;
-    const modTextList = req.body.textList;
-    const modVerbList = req.body.verbList;
+    // const modTextList = req.body.textList;
+    // const modVerbList = req.body.verbList;
     const modAuthor = req.body.author;
-    const modCards = req.body.cards;
+    // const modCards = req.body.cards;
     const modSentences = req.body.sentences;
-    const translatedText = req.body.translatedText;
+    // const translatedText = req.body.translatedText;
+    const userData = req.body.userData;
 
-    const modConjugations = await conjugate(modVerbList);
+    // const modConjugations = await conjugate(modVerbList);
+    const processData = await preprocessData(modSentences, modText, userData);
     const modFormattedConjugations = [];
     
 
@@ -220,11 +223,11 @@ export const createModule = async (req, res) => {
             title: modTitle,
             text: modText,
             author: modAuthor,
-            cards: modCards,
-            textList: modTextList,
-            translatedText: translatedText,
+            cards: processData.cards,
+            textList: processData.textList,
+            translatedText: processData.translatedText,
             verbs: {
-                infinitives: modVerbList, 
+                infinitives: processData.verbList, 
                 conjugations: modFormattedConjugations
             },
             sentences: modSentences,

@@ -23,7 +23,8 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.2",
     "nodemailer": "^6.9.3",
-    "reverso-api": "^2.22.4"
+    "reverso-api": "^2.22.4",
+    "translate": "^3.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

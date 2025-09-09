@@ -13,6 +13,7 @@ dotenv.config()
 connectDB()
 
 const port = process.env.port || 5000;
+const allowedOrigin = "https://quizitalian-90795058235.us-central1.run.app";
 
 const app = express();
 
